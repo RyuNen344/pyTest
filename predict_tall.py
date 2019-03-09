@@ -31,6 +31,20 @@ def show_data2(ax,x0,x1,t):
         ax.plot(x0,x1,t,'o',color='cornflowerblue',markeredgecolor='white',markersize=6,markeredgewidth=0.5)
         ax.view_init(elev=35,azim=-75)
 
+#面の表示
+def show_plane(ax,w):
+    px0 = np.linspace(x0_min,x0_max,5)    
+    px1 = np.linspace(x1_min,x1_max,5)
+    px0,px1 = np.meshgrid(px0,px1)
+    y = w[0]*px + w[1] * px1 + w[2]
+    ax.plot_surface(px0,px1,y,rstride=1,cstride=1,alpha = 0.3,color="bule",edgecolor="black")
+
+#面のMSE
+def mse_plane(x0,x1,t,w):
+    y = w[0] * x0 + w[1] * x1 + w[2]
+    mse = np.mean((y - t)**2)
+    return mse
+
 np.random.seed(seed=1)
 X_min = 4
 X_max = 30
